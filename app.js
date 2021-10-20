@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bookRouter = require('./routes/book');
 var customerRouter = require('./routes/customer');
+var borrowRouter = require('./routes/borrow');
 
 
 var app = express();
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/book', bookRouter);
 app.use('/customer', customerRouter);
+app.use('/borrow', borrowRouter);
 
 module.exports = app;
 
