@@ -6,14 +6,24 @@ var bookRouter = require('./routes/book');
 var customerRouter = require('./routes/customer');
 
 
-
 var app = express();
 
 const basicAuth = require('express-basic-auth');
-app.use(basicAuth({users: { 'admin': '1234' }}))
+ // app.use(basicAuth({users: { 'admin': '1234' }}))
+function myAuthorizer(username, password, cb){
+    if(user==='admin' && password ==='testi'){
+      return cb(null, true);
+
+    }
+    else{
+        return cb(null, false);
+    }
+
+}
 const helmet = require('helmet');
 const cors = require('cors');
 
+app.use(basicAuth( { authorizer: myAuthorizer, authorizeAsync:true, } ))
 app.use(helmet());
 app.use(cors());
 app.use(logger('dev'));
